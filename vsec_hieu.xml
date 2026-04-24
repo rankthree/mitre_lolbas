@@ -303,7 +303,7 @@
     <if_sid>60000</if_sid>
     <field name="win.system.eventID">^1$</field>
     <field name="win.eventdata.image" type="pcre2">(?i)\\bitsadmin\.exe$</field>
-    <field name="win.eventdata.commandLine" type="pcre2">(?i)(/transfer|/addfile|/setnotifycmdline)\s+</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)[/\-](transfer|addfile|setnotifycmdline)\s+</field>
     <description>T1197 - Bitsadmin executed with transfer/addfile/persistence payload (Sysmon)</description>
     <mitre>
       <id>T1197</id>
@@ -316,7 +316,7 @@
     <if_sid>60000</if_sid>
     <field name="win.system.eventID">^4688$</field>
     <field name="win.eventdata.newProcessName" type="pcre2">(?i)\\bitsadmin\.exe$</field>
-    <field name="win.eventdata.commandLine" type="pcre2">(?i)(/transfer|/addfile|/setnotifycmdline)\s+</field>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)[/\-](transfer|addfile|setnotifycmdline)\s+</field>
     <description>T1197 - Bitsadmin executed with transfer/addfile/persistence payload (Native 4688)</description>
     <mitre>
       <id>T1197</id>
