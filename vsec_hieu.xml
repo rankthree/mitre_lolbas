@@ -160,24 +160,44 @@
     <group>lolbas_aspnet,defense_evasion,</group>
   </rule>
 
-  <rule id="170301" level="11">
+<rule id="170301" level="11">
     <if_sid>60000</if_sid>
     <field name="win.system.eventID">^1$</field>
     <field name="win.eventdata.image" type="pcre2">(?i)\\at\.exe$</field>
-    <field name="win.eventdata.commandLine" type="pcre2">(?i)(\/interactive|[\\/]{2,}[a-z0-9\.\-]+)</field>
-    <description>T1053.002 - At.exe executed with interactive flag or UNC remote path (Sysmon)</description>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)[/\-]interactive</field>
+    <description>T1053.002 - At.exe executed with interactive flag (Sysmon)</description>
     <mitre><id>T1053.002</id></mitre>
-    <group>lolbas_at,execution,lateral_movement,</group>
+    <group>lolbas_at,execution,privilege_escalation,</group>
   </rule>
 
   <rule id="170351" level="11">
     <if_sid>60000</if_sid>
     <field name="win.system.eventID">^4688$</field>
     <field name="win.eventdata.newProcessName" type="pcre2">(?i)\\at\.exe$</field>
-    <field name="win.eventdata.commandLine" type="pcre2">(?i)(\/interactive|[\\/]{2,}[a-z0-9\.\-]+)</field>
-    <description>T1053.002 - At.exe executed with interactive flag or UNC remote path (Native 4688)</description>
+    <field name="win.eventdata.commandLine" type="pcre2">(?i)[/\-]interactive</field>
+    <description>T1053.002 - At.exe executed with interactive flag (Native 4688)</description>
     <mitre><id>T1053.002</id></mitre>
-    <group>lolbas_at,execution,lateral_movement,</group>
+    <group>lolbas_at,execution,privilege_escalation,</group>
+  </rule>
+
+  <rule id="170302" level="12">
+    <if_sid>60000</if_sid>
+    <field name="win.system.eventID">^1$</field>
+    <field name="win.eventdata.image" type="pcre2">(?i)\\at\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">\\\\\\\\[a-z0-9\.\-]+</field>
+    <description>T1053.002 - At.exe executed with remote target (Sysmon)</description>
+    <mitre><id>T1053.002</id></mitre>
+    <group>lolbas_at,lateral_movement,</group>
+  </rule>
+
+  <rule id="170352" level="12">
+    <if_sid>60000</if_sid>
+    <field name="win.system.eventID">^4688$</field>
+    <field name="win.eventdata.newProcessName" type="pcre2">(?i)\\at\.exe$</field>
+    <field name="win.eventdata.commandLine" type="pcre2">\\\\\\\\[a-z0-9\.\-]+</field>
+    <description>T1053.002 - At.exe executed with remote target (Native 4688)</description>
+    <mitre><id>T1053.002</id></mitre>
+    <group>lolbas_at,lateral_movement,</group>
   </rule>
 
   <rule id="170321" level="12">
